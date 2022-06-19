@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>INDUSTRIALSTORE</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Hurricane&family=Kdam+Thmor+Pro&display=swap" rel="stylesheet" />
+</head>
+
+<body class="bg-dark bg-gradient">
+  <div class="header">
+
+    </header>
+    <nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">INDUSTRIALSTORE</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto mb-lg-1">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="#">INICIO</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">NOSOTROS</a>
+            </li>
+          </ul>
+        </div>
+        <button class="btn btn-outline-success" id="boton-carrito" data-bs-toggle="modal"
+          data-bs-target="#exampleModal">
+          <i class="bi bi-cart4"></i>
+          <span id="contadorCarrito">0</span>
+        </button>
+      </div>
+    </nav>
+  </div>
+
+  <main class="d-flex flex-row flex-wrap justify-content-center align-items-center" style="width: 80%; margin: 0 auto"
+    id="contenedor-productos"></main>
+  <div class="modal-contenedor modal-active">
+    <div class="modal-carrito modal-active">
+
+    </div>
+  </div>
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+          <div id="carrito-contenedor">
+          </div>
+          <p class="precioProducto">Precio total: $<span id="precioTotal">0</span></p>
+          <div id="terminar" style="display: flex; justify-content: flex-end;"></div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Seguir Comprando</button>
+          <button type="button" class="btn btn-primary">Ir a pagar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+    crossorigin="anonymous"></script>
+  <script src="stockProductos.js"></script>
+  <script src="jsindustrialStore.js"></script>
+
+  <!-- Footer -->
+  <footer class="text-center text-lg-start text-white" style="background-color: #1a1a1b">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Links -->
+      <section class="">
+        <!--Grid row-->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">
+              INDUSTRIALSTORE
+            </h6>
+            <p>
+              Para mayor informacion utilice los telefonos de contacto o la
+              casilla de mail correspondiente.
+            </p>
+          </div>
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+          <hr class="w-100 clearfix d-md-none" />
+          <!-- Grid column -->
+          <hr class="w-100 clearfix d-md-none" />
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+            <h6 class="text-uppercase mb-4 font-weight-bold">Contacto</h6>
+            <p><i class="fas fa-home mr-3"></i> laferrere</p>
+            <p>
+              <i class="fas fa-envelope mr-3"></i> industrialStore@gmail.com
+            </p>
+            <p><i class="fas fa-phone mr-3"></i> 1111111111</p>
+            <p><i class="fas fa-print mr-3"></i> 1111111111</p>
+          </div>
+        </div>
+      </section>
+      <hr class="my-3" />
+
+      <section class="p-3 pt-0">
+        <div class="row d-flex align-items-center">
+          <div class="col-md-7 col-lg-8 text-center text-md-start">
+            <!-- Copyright -->
+            <div class="p-3">
+              © 2022 Copyright:
+              <a class="text-white" href="https://mdbootstrap.com/">industrialStore.com</a>
+            </div>
+            <!-- Copyright -->
+          </div>
+          <div class="col-md-5 col-lg-4 ml-lg-0 text-center text-md-end">
+            <!-- Facebook -->
+            <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
+                class="fab fa-facebook-f"></i></a>
+            <!-- Instagram -->
+            <a class="btn btn-outline-light btn-floating m-1" class="text-white" role="button"><i
+                class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+      </section>
+    </div>
+  </footer>
+</body>
+
+</html>
