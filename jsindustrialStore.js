@@ -30,20 +30,30 @@ function agregarAlCarrito(id) {
  }
 
  function mostrarCarrito(productoAgregar) {
+const { nombre, precio, id } = productoAgregar;
 
     let div = document.createElement('div')
     div.classList.add('productoEnCarrito')
-    div.innerHTML= `<div><p>${productoAgregar.nombre}</p>
-                    <p>Precio: $${productoAgregar.precio}</p>
-                    <button id=eliminar${productoAgregar.id} class="boton-eliminar"><i class="trash"></i></button></div>`
+    div.innerHTML= `<div class="d-flex justify-content-between align-items-center"><p>${nombre}</p>
+    
+    <p>Precio: $${precio}</p>
+    <button id=eliminar${id} class="btn btn-danger"><i class="trash"></i>X</button>
+    
+    </div>`
+
     contenedorCarrito.appendChild(div)
 
-    let btnEliminar = document.getElementById(`eliminar${productoAgregar.id}`)
+    let btnEliminar = document.getElementById(`eliminar${id}`)
     btnEliminar.addEventListener('click',()=>{
         btnEliminar.parentElement.remove()
-        carritoDeCompras = carritoDeCompras.filter(ele => ele.id !== productoAgregar.id)
+        carritoDeCompras = carritoDeCompras.filter(ele => ele.id !== id)
         actualizarCarrito()
         localStorage.setItem('carrito', JSON.stringify(carritoDeCompras))
+        Swal.fire(
+            'Industrial Store',
+            'Producto eliminado del carrito',
+            'error'
+          )
     })
 
 }
@@ -77,6 +87,11 @@ function mostrarProductos() {
     let btnAgregar = document.getElementById(`boton${el.id}`);
     btnAgregar.addEventListener("click", () => {
       agregarAlCarrito(el.id);
+      Swal.fire(
+        'Industrial Store',
+        'Producto agregado al carrito',
+        'success'
+      )
     });
   });
 }
