@@ -1,4 +1,5 @@
 let carritoDeCompras = []
+let stockProductos = []
 const contenedorProductos = document.getElementById("contenedor-productos");
 const contenedorCarrito = document.getElementById('carrito-contenedor');
 const botonTerminar = document.getElementById('terminar')
@@ -11,65 +12,70 @@ const carritoAbrir = document.getElementById('boton-carrito');
 const contenedorModal = document.getElementsByClassName('modal-contenedor')[0]
 const modalCarrito = document.getElementsByClassName('modal-carrito')[0]
 
-carritoAbrir.addEventListener('click', ()=> {
-    contenedorModal.classList.toggle('modal-active')
+if (JSON.parse(localStorage.getItem("carrito"))) {
+  carritoDeCompras = JSON.parse(localStorage.getItem("carrito"))
+  actualizarCarrito()
+  carritoDeCompras.map((prod) => mostrarCarrito(prod))
+}
+
+carritoAbrir.addEventListener('click', () => {
+  contenedorModal.classList.toggle('modal-active')
 })
-modalCarrito.addEventListener('click',(e)=>{
-    e.stopPropagation()
+modalCarrito.addEventListener('click', (e) => {
+  e.stopPropagation()
 })
 
 
 function agregarAlCarrito(id) {
-    let productoAgregar = stockProductos.find(item => item.id === id)
-     console.log(productoAgregar)
-     carritoDeCompras.push(productoAgregar)
-     mostrarCarrito(productoAgregar)
-     actualizarCarrito()
- 
-     localStorage.setItem('carrito', JSON.stringify(carritoDeCompras))
- }
+  let productoAgregar = stockProductos.find(item => item.id === id)
+  console.log(productoAgregar)
+  carritoDeCompras.push(productoAgregar)
+  mostrarCarrito(productoAgregar)
+  actualizarCarrito()
 
- function mostrarCarrito(productoAgregar) {
-const { nombre, precio, id } = productoAgregar;
+  localStorage.setItem('carrito', JSON.stringify(carritoDeCompras))
+}
 
-    let div = document.createElement('div')
-    div.classList.add('productoEnCarrito')
-    div.innerHTML= `<div class="d-flex justify-content-between align-items-center"><p>${nombre}</p>
+function mostrarCarrito(productoAgregar) {
+  const { nombre, precio, id } = productoAgregar;
+
+  let div = document.createElement('div')
+  div.classList.add('productoEnCarrito')
+  div.innerHTML = `<div class="d-flex justify-content-between align-items-center"><p>${nombre}</p>
     
     <p>Precio: $${precio}</p>
     <button id=eliminar${id} class="btn btn-danger"><i class="trash"></i>X</button>
     
     </div>`
 
-    contenedorCarrito.appendChild(div)
+  contenedorCarrito.appendChild(div)
 
-    let btnEliminar = document.getElementById(`eliminar${id}`)
-    btnEliminar.addEventListener('click',()=>{
-        btnEliminar.parentElement.remove()
-        carritoDeCompras = carritoDeCompras.filter(ele => ele.id !== id)
-        actualizarCarrito()
-        localStorage.setItem('carrito', JSON.stringify(carritoDeCompras))
-        Swal.fire(
-            'Industrial Store',
-            'Producto eliminado del carrito',
-            'error'
-          )
-    })
+  let btnEliminar = document.getElementById(`eliminar${id}`)
+  btnEliminar.addEventListener('click', () => {
+    btnEliminar.parentElement.remove()
+    carritoDeCompras = carritoDeCompras.filter(ele => ele.id !== id)
+    actualizarCarrito()
+    localStorage.setItem('carrito', JSON.stringify(carritoDeCompras))
+    Swal.fire(
+      'Industrial Store',
+      'Producto eliminado del carrito',
+      'error'
+    )
+  })
 
 }
 
 
-function  actualizarCarrito (){
-   contadorCarrito.innerText = carritoDeCompras.length
-   precioTotal.innerText = carritoDeCompras.reduce((acc,el)=> acc + el.precio, 0)
-                                                               
+function actualizarCarrito() {
+  console.log(carritoDeCompras.length)
+  contadorCarrito.innerText = carritoDeCompras.length
+  precioTotal.innerText = carritoDeCompras.reduce((acc, el) => acc + el.precio, 0)
+
 }
 
 
- async function mostrarProductos() {
-  const respose = await fetch('./stockProductos.json')
-  const stockProductos = await respose.json()
-console.log(respose)
+function mostrarProductos() {
+
   stockProductos.forEach((el) => {
     let div = document.createElement("div");
     div.className = "producto";
@@ -98,6 +104,13 @@ console.log(respose)
     });
   });
 }
-mostrarProductos();
+
+async function fetchProductos() {
+  const respose = await fetch('./stockProductos.json')
+  stockProductos = await respose.json()
+  mostrarProductos()
+}
+
+fetchProductos()
 
 
