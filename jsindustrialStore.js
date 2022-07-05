@@ -66,7 +66,10 @@ function  actualizarCarrito (){
 }
 
 
-function mostrarProductos() {
+ async function mostrarProductos() {
+  const respose = await fetch('./stockProductos.json')
+  const stockProductos = await respose.json()
+console.log(respose)
   stockProductos.forEach((el) => {
     let div = document.createElement("div");
     div.className = "producto";
